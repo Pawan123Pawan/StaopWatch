@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background: rgb(26, 40, 117);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+        }
+
+        .digit {
+            font-size: 100px;
+            font-weight: bold;
+            color: blanchedalmond;
+        }
+
+        .text {
+            font-size: 50px;
+            font-weight: bold;
+            color: blanchedalmond;
+        }
+
+        #btn_cantainer {
+            text-align: center;
+        }
+
+        .btn {
+            margin: 10px 20px;
+            padding: 3px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+        }
+
+        #start {
+            background: green;
+        }
+
+        #stop {
+            background: blue;
+        }
+
+        #reset {
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="cantainer">
+        <div id="time">
+            <span class="digit" id="hr">00</span>
+            <span class="text">Hr</span>
+            <span class="digit" id="min">00</span>
+            <span class="text">Min</span>
+            <span class="digit" id="sec">00</span>
+            <span class="text">Sec</span>
+            <span class="digit" id="count">00</span>
+        </div>
+        <div id="btn_cantainer">
+            <button class="btn" id="start" onclick="start()"> Start</button>
+            <button class="btn" id="stop" onclick="stop()">Stop</button>
+            <button class="btn" id="reset" onclick="reset()">Reset</button>
+        </div>
+
+        <script>
+            let hr = 0;
+            let min = 0;
+            let sec = 0;
+            let count = 0;
+            let timer = false;
+
+            function start() {
+                timer = true;
+                stopwatch()
+            }
+            function stop() {
+                timer = false;
+
+            }
+            function reset() {
+                timer = false;
+                hr = 0;
+                min = 0;
+                sec = 0;
+                count = 0;
+                document.getElementById("hr").innerHTML="00";
+                document.getElementById("min").innerHTML="00";
+                document.getElementById("sec").innerHTML="00";
+                document.getElementById("count").innerHTML="00";
+                
+            }
+            function stopwatch() {
+                if (timer == true) {
+                    count = count + 1;
+
+                    if (count == 100) {
+                        sec = sec + 1;
+                        count = 0;
+
+                    }
+                    if (sec == 60) {
+                        min = min + 1;
+                        sec = 0;
+                    }
+                    if (min == 60) {
+                        hr = hr + 1;
+                        sec = 0;
+                        min = 0;
+                    }
+                    let hrstring = hr;
+                    let minstring = min;
+                    let secstring = sec;
+                    let countstring = count;
+                    if(hr<10){
+                        hrstring="0"+hrstring
+                    }
+                    if(min<10){
+                        minstring="0"+minstring
+                    }
+                    if(sec<10){
+                        secstring="0"+secstring
+                    }
+                    if(count<10){
+                        countstring="0"+countstring
+                    }
+
+                    document.getElementById("hr").innerHTML = hrstring;
+                    document.getElementById("min").innerHTML = minstring;
+                    document.getElementById("sec").innerHTML = secstring;
+                    document.getElementById("count").innerHTML = countstring;
+                    setTimeout("stopwatch()", 10)
+                }
+
+            }
+
+        </script>
+
+    </div>
+</body>
+
+</html>
